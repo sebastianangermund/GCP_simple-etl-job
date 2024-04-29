@@ -1,0 +1,57 @@
+### IMPORTANT HERE IS TO SET A PREFIX SO THE STATE FILE GETS STORED IN A SPECIFIC PATH IN THE BUCKET, THIS ALLOWS YOU TO HAVE SEVERAL STATEFILES IN THE SAME BUCKET AND SEPARATING THEM
+### THE VALUES IN THE TERRAFORM INIT IS USED BY THE TERRAFORM BACKEND RESOURCE IN THE configuration.tf FILE TO POINT TO WHERE THE STATE FILE IS FOUND
+### VARIABLES THAT START WITH TF_VAR_ ARE SO TERRAFORM CAN PICK THE VALUES UP WHEN DOING THE PLAN AND APPLY
+### DEV CAN BE DEPLOYED FROM BRANCHES AND IS DEPLOYED AUTOMATICALLY. FOR ACC AND PRD THEY ARE DEPLOYED MANUALLY AND ONLY FROM MAIN/MASTER BRANCH
+
+variables:
+  GOOGLE_PROJECT: data-services-99l33-dev
+  BUCKET_PREFIX: landing-area
+  TF_VAR_OWNERTEAM: team-yoda
+  TF_VAR_DEPLOY_PROJECT: data-services-99l33-dev
+  BUCKET_NAME: gcp-${TF_VAR_DEPLOY_PROJECT}-buk-eur4-tf-state
+  TF_CLI_CONFIG_FILE: $CI_PROJECT_DIR/.terraformrc
+
+image:
+  name: europe-docker.pkg.dev/seb-images-90b468c6/seb-common/terraform-image:1.6.latest
+  entrypoint: [""]
+
+before_script:
+  - rm -rf .terraform
+  - terraform --version
+  - echo -e "credentials \"$CI_SERVER_HOST\" {\n  token = \"$CI_JOB_TOKEN\"\n}" > $TF_CLI_CONFIG_FILE
+  - terraform -chdir=terraform init -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=${BUCKET_PREFIX}"
+
+stages:
+  - plan-dev
+  - deploy-dev
+  - cleanup-dev
+
+plan-dev: 
+  stage: plan-dev
+  when: manual
+  environment:
+    name: dev
+  script:
+    - terraform -chdir=terraform validate
+    - terraform -chdir=terraform plan -var 'ENVIRONMENT=dev' -out "planfile"
+  artifacts:
+    expire_in: 90 days
+    paths:
+      - terraform/planfile
+      - generated/
+
+deploy-dev: 
+  stage: deploy-dev
+  when: manual
+  environment:
+    name: dev
+  script:
+    - terraform -chdir=terraform apply -input=false "planfile"
+
+cleanup-dev:
+  stage: cleanup-dev
+  when: manual
+  environment:
+    name: dev
+  script:
+    - terraform -chdir=terraform destroy -auto-approve

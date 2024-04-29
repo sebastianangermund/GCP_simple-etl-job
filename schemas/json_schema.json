@@ -1,0 +1,1 @@
+{"title":"cat_facts","type":"object","properties":{"user":{"type":"string","description":"UserID"},"text":{"type":"string","description":"Catfact text"},"createdAt":{"description":"Created Wat timestamp","type":"string","minimum":0}}}

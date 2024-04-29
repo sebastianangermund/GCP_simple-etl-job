@@ -1,0 +1,17 @@
+[
+    {
+       "name": "user",
+       "mode": "NULLABLE",
+       "type": "STRING"
+    },
+    {
+       "name": "text",
+       "mode": "NULLABLE",
+       "type": "STRING"
+    },
+    {
+       "name": "createdAt",
+       "mode": "NULLABLE",
+       "type": "STRING"
+    }
+ ]

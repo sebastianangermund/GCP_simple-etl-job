@@ -1,0 +1,459 @@
+{
+  "doc": "Avro Schema created to report events on MD DO ProductArrangement Date=2022-04-21",
+  "fields": [
+    {
+      "doc": "metadata about the message itself",
+      "name": "metaHeader",
+      "type": [
+        "null",
+        {
+          "fields": [
+            {
+              "doc": "Which system that the message originates from",
+              "name": "sourceOrigin",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "The date time when the update was made",
+              "name": "sourceTimestamp",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "Action to take on the transferred domain object",
+              "name": "action",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "Schema version to domain model",
+              "name": "schemaVersion",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          ],
+          "name": "MetaHeader",
+          "type": "record"
+        }
+      ]
+    },
+    {
+      "doc": "Product Arrangement base model",
+      "name": "productArrangement",
+      "type": [
+        "null",
+        {
+          "fields": [
+            {
+              "doc": "Product arrangement independent information about the product arrangement document",
+              "name": "header",
+              "type": [
+                "null",
+                {
+                  "fields": [
+                    {
+                      "name": "version",
+                      "type": [
+                        "null",
+                        "int"
+                      ]
+                    },
+                    {
+                      "name": "timestamp",
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    }
+                  ],
+                  "name": "ProductArrangementHeader",
+                  "type": "record"
+                }
+              ]
+            },
+            {
+              "doc": "The official identity of the product arrangement as specified by the product arrangement operational store",
+              "name": "arId",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "The internal identity of the product arrangement",
+              "name": "internalId",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "Information about the product arrangement product connection",
+              "name": "productConnections",
+              "type": [
+                "null",
+                {
+                  "items": {
+                    "fields": [
+                      {
+                        "doc": "The Master Data Management Platform query layer identity of the product the product arrangement is synched against.",
+                        "name": "pdId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The internal identity of the product type as specified by the product arrangement operational store",
+                        "name": "internalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The internal product id the product arrangement product is pointing to",
+                        "name": "productId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The earliest date the product arrangement product will be valid (active) or in other word defines the product type for the product arrangement.",
+                        "name": "validFrom",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The latest date the product arrangement product will be valid (active).",
+                        "name": "validTo",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      }
+                    ],
+                    "name": "ProductArrangementProductConnection",
+                    "type": "record"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            {
+              "doc": "Eventual product arrangement name as specified by the owner of the product arrangement",
+              "name": "customerArName",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "The identity of the eventual asset represented by the product arrangement",
+              "name": "trackingId",
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "doc": "The current life cycle status of the product arrangement",
+              "name": "lifeCycleStatuses",
+              "type": [
+                "null",
+                {
+                  "items": {
+                    "fields": [
+                      {
+                        "doc": "The internal identity of the product lifecycle status as specified by the product arrangement operational store",
+                        "name": "internalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The enumeration represents product arrangement lifecycle statuses",
+                        "name": "lifeCycleStatus",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The earliest date the product arrangement will be effective (active). That is if the specified date has been reached the product arrangement will be automatically activated",
+                        "name": "validFrom",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The latest date the product arrangement will be effective (active). That is if the specified date has been reached the product arrangement will be automatically terminated. If no valid to date is specified the life cycle status is valid until explicitly changed.",
+                        "name": "validTo",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      }
+                    ],
+                    "name": "ProductArrangementLifecycleStatus",
+                    "type": "record"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            {
+              "doc": "The current life cycle status of the product arrangement",
+              "name": "financialStatuses",
+              "type": [
+                "null",
+                {
+                  "items": {
+                    "fields": [
+                      {
+                        "doc": "The internal identity of the product financial status as specified by the product arrangement operational store",
+                        "name": "internalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The enumeration represents product arrangement financial statuses",
+                        "name": "financialStatus",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The earliest date the product arrangement will be effective (active). That is if the specified date has been reached the product arrangement will be automatically activated",
+                        "name": "validFrom",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "doc": "The latest date the product arrangement will be effective (active). That is if the specified date has been reached the product arrangement will be automatically terminated. If no valid to date is specified the life cycle status is valid until explicitly changed.",
+                        "name": "validTo",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      }
+                    ],
+                    "name": "ProductArrangementFinancialStatus",
+                    "type": "record"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            {
+              "doc": "Included properties for the product arrangement",
+              "name": "properties",
+              "type": [
+                "null",
+                {
+                  "items": {
+                    "fields": [
+                      {
+                        "name": "internalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "type",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "value",
+                        "type": [
+                          "null",
+                          {
+                            "fields": [
+                              {
+                                "name": "value",
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "type",
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              },
+                              {
+                                "name": "subtype",
+                                "type": [
+                                  "null",
+                                  "string"
+                                ]
+                              }
+                            ],
+                            "name": "TypedValue",
+                            "type": "record"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "validFrom",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "validTo",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      }
+                    ],
+                    "name": "ProductArrangementProperties",
+                    "type": "record"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            {
+              "doc": "Included relations for the product arrangement",
+              "name": "relations",
+              "type": [
+                "null",
+                {
+                  "items": {
+                    "fields": [
+                      {
+                        "name": "internalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "relationClass",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "type",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "group",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "fromId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "toId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "fromInternalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "toInternalId",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "validFrom",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "validTo",
+                        "type": [
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "name": "properties",
+                        "type": [
+                          "null",
+                          {
+                            "type": "map",
+                            "values": "string"
+                          }
+                        ]
+                      }
+                    ],
+                    "name": "Relation",
+                    "type": "record"
+                  },
+                  "type": "array"
+                }
+              ]
+            },
+            {
+              "doc": "The earliest date when the product arrangement are legally valid",
+              "name": "agreedValidFrom",
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          ],
+          "name": "ProductArrangement",
+          "type": "record"
+        }
+      ]
+    }
+  ],
+  "name": "ProductArrangementEnvelope",
+  "namespace": "se.seb.mdm.platform.domain",
+  "type": "record",
+  "version": "1.9"
+}
